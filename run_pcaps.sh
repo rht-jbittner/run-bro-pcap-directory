@@ -102,7 +102,7 @@ echo "DATA_PATH        = $DATA_PATH"
 echo "TEST_OUTPUT_PATH = $TEST_OUTPUT_PATH"
 echo "==================================================="
 
-for file in $(find ${DATA_PATH} -type f -name '*.pcap*')
+for file in $(find ${DATA_PATH} -type f -follow -name '*.pcap*')
 do
   # get the file name
   BASE_FILE_NAME=$(basename "${file}")
