@@ -102,8 +102,7 @@ echo "DATA_PATH        = $DATA_PATH"
 echo "TEST_OUTPUT_PATH = $TEST_OUTPUT_PATH"
 echo "==================================================="
 
-
-for file in "${DATA_PATH}"/**/*.pcap*
+for file in $(find ${DATA_PATH} -type f -name '*.pcap*')
 do
   # get the file name
   BASE_FILE_NAME=$(basename "${file}")
@@ -116,7 +115,7 @@ do
   cd "${TEST_OUTPUT_PATH}/${OUTPUT_DIRECTORY_NAME}" || exit 1
   pwd
   echo "Processing ${file}"
-  bro site/local -C -r "${file}"
+  bro /opt/bro/share/bro/site/local.bro -C -r "${file}"
   rc=$?; if [[ ${rc} != 0 ]]; then
     exit ${rc}
   fi
